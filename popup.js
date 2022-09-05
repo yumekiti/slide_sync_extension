@@ -1,7 +1,13 @@
-changeColor.addEventListener("click", async () => {
-  Test();
+// イベント
+button.addEventListener("click", async () => {
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: main,
+  });
 });
 
-const Test = () => {
-  console.log("test");
-};
+// 関数
+const main = () => {
+  document.querySelector("#tabTopics7 > a").click();
+}
