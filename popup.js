@@ -1,13 +1,10 @@
+const host = "localhost:8080";
+
 // イベント
 button.addEventListener("click", async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    function: main,
-  });
+  console.log("button clicked");
+  axios.get("http://" + host + "/uuid")
+    .then((res) => {
+      console.log(res);
+    });
 });
-
-// 関数
-const main = () => {
-  document.querySelector("#tabTopics7 > a").click();
-}
