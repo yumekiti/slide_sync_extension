@@ -18,10 +18,7 @@ app.use(allowCrossDomain)
 
 // uuid を返す
 app.get("/uuid", (req, res) => {
-  // uuid を生成
-  const uuid = shortid.generate();
-  // uuid を json で返す
-  res.json({ uuid: uuid });
+  res.json({uuid: shortid.generate()});
 });
 
 // 双方向通信開始
