@@ -9,7 +9,6 @@ const io = require("socket.io")(http, {
   }
 });
 const shortid = require('shortid');
-let store = {};
 
 // サーバーポートの指定
 const PORT = process.env.PORT || 8080;
