@@ -25,12 +25,15 @@ app.get("/uuid", (req, res) => {
   res.json({uuid: shortid.generate()});
 });
 
+// public
+app.use("/", express.static("public"));
+
 // 双方向通信開始
 io.on("connection", (socket) => {
   console.log("socket connected");
 
   socket.on('join', (value) => {
-    socket.emit('welcome', value);
+    socket.broadcast.emit('welcome', value);
   });
 
   socket.on("disconnect", () => {
