@@ -1,3 +1,9 @@
+// slide
+const next = async () => {
+  await document.querySelector("#tabTopics2 > a").click();
+};
+
+// socket
 const host = "localhost:8080";
 const socket = io.connect("http://" + host);
 
@@ -5,11 +11,16 @@ socket.on("connect", () => {
   console.log("socket connected");
 });
 
-socket.on("event", (value) => {
+socket.on("event", async (value) => {
   console.log(value);
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: next,
+  });
 });
 
-// 関数
+// function
 const setUUID = async () => {
   const res = await axios.get("http://" + host + "/uuid");
   chrome.storage.sync.set({uuid: res.data.uuid});
@@ -22,7 +33,7 @@ const getUUID = async () => {
 
 const start = async () => {
   const uuid = await getUUID();
-  console.log(uuid);
+  document.getElementById("uuid").textContent = uuid;
   await socket.emit("join", uuid);
 }
 
@@ -31,5 +42,5 @@ const stop = async () => {
   socket.leave(uuid);
 }
 
-// イベント
+// event
 button.addEventListener("click", async () => start());
