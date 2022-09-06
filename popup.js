@@ -1,10 +1,19 @@
 const host = "localhost:8080";
+const socket = io.connect("http://" + host);
+
+socket.on("connect", () => {
+  console.log("socket connected");
+});
+
+socket.on("welcome", (value) => {
+  console.log(value);
+});
 
 // イベント
 buttonSet.addEventListener("click", async () => {
   console.log("button clicked");
   const uuid = await getUuid();
-  chrome.storage.sync.set({uuid: uuid})
+  chrome.storage.sync.set({uuid: uuid});
 });
 
 const getUuid = async () => {
@@ -14,6 +23,7 @@ const getUuid = async () => {
 
 buttonGet.addEventListener("click", async () => {
   chrome.storage.sync.get(["uuid"], (result) => {
-    console.log(result.uuid);
+    const uuid = result.uuid
+    socket.emit("join", uuid);
   });
 });
