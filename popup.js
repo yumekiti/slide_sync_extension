@@ -5,25 +5,31 @@ socket.on("connect", () => {
   console.log("socket connected");
 });
 
-socket.on("welcome", (value) => {
+socket.on("event", (value) => {
   console.log(value);
 });
 
-// イベント
-buttonSet.addEventListener("click", async () => {
-  console.log("button clicked");
-  const uuid = await getUuid();
-  chrome.storage.sync.set({uuid: uuid});
-});
-
-const getUuid = async () => {
+// 関数
+const setUUID = async () => {
   const res = await axios.get("http://" + host + "/uuid");
-  return res.data.uuid;
+  chrome.storage.sync.set({uuid: res.data.uuid});
 }
 
-buttonGet.addEventListener("click", async () => {
-  chrome.storage.sync.get(["uuid"], (result) => {
-    const uuid = result.uuid
-    socket.emit("join", uuid);
-  });
-});
+const getUUID = async () => {
+  const uuid = await chrome.storage.sync.get("uuid");
+  return uuid.uuid;
+}
+
+const start = async () => {
+  const uuid = await getUUID();
+  console.log(uuid);
+  await socket.emit("join", uuid);
+}
+
+const stop = async () => {
+  const uuid = await getUUID();
+  socket.leave(uuid);
+}
+
+// イベント
+button.addEventListener("click", async () => start());

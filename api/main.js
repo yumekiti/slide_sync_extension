@@ -9,6 +9,7 @@ const io = require("socket.io")(http, {
   }
 });
 const shortid = require('shortid');
+let store = {};
 
 // サーバーポートの指定
 const PORT = process.env.PORT || 8080;
@@ -33,7 +34,11 @@ io.on("connection", (socket) => {
   console.log("socket connected");
 
   socket.on('join', (value) => {
-    socket.broadcast.emit('welcome', value);
+    socket.join(value);
+  });
+
+  socket.on('event', (value) => {
+    io.to(value.uuid).emit("event", value.event);
   });
 
   socket.on("disconnect", () => {
