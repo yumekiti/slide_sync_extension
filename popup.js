@@ -32,6 +32,7 @@ const getUUID = async () => {
 }
 
 const start = async () => {
+  await setUUID();
   const uuid = await getUUID();
   document.getElementById("uuid").textContent = uuid;
   await socket.emit("join", uuid);
