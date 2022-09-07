@@ -18,19 +18,11 @@ socket.on("connect", () => {
 
 socket.on("event",  (value) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (value === "test") {
-      chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        function: () => {
-          document.querySelector("#tabTopics2 > a").click();
-        },
-      });
-    }
     if(value === "next") {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
         function: () => {
-          document.querySelector("#nextButton").click();
+          document.querySelector("#react-page > div > div > div.prototype--documentationContainer--JPUjj > div > div.prototype--content--fG_eb > div.prototype--contentMiddle--2lFG_ > div.prototype--footerContainer--1oDS_ > div > div.footer--frameCounterContainer__OLD--rJtYh > div > button:nth-child(3)").click();
         },
       });
     }
@@ -38,7 +30,7 @@ socket.on("event",  (value) => {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
         function: () => {
-          document.querySelector("#prevButton").click();
+          document.querySelector("#react-page > div > div > div.prototype--documentationContainer--JPUjj > div > div.prototype--content--fG_eb > div.prototype--contentMiddle--2lFG_ > div.prototype--footerContainer--1oDS_ > div > div.footer--frameCounterContainer__OLD--rJtYh > div > button:nth-child(1)").click();
         },
       });
     }
