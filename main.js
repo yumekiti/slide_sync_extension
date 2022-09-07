@@ -40,10 +40,11 @@ socket.on("event",  (value) => {
 const start = async () => {
   await setUUID();
   const uuid = await getUUID();
+  const link = "http://" + host + "/room/" + uuid;
 
   document.getElementById("qrcode").innerHTML = "";
   new QRCode(document.getElementById("qrcode"), {
-    text: "http://" + host + "/room/" + uuid,
+    text: link,
     width: 128,
     height: 128,
     colorDark : "#ffffff",
@@ -51,7 +52,14 @@ const start = async () => {
     correctLevel : QRCode.CorrectLevel.H
   });
   
-  document.getElementById("uuid").textContent = uuid;
+  // add input
+  document.getElementById("uuid").innerHTML = "<input type='text' value='" + link + "' readonly> <button id='copy'>Copy text</button>";
+  document.getElementById("copy").addEventListener("click", () => {
+    const copyText = document.querySelector("input");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+  });
   await socket.emit("join", uuid);
 };
 
