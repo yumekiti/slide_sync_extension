@@ -37,10 +37,5 @@ const start = async () => {
   await socket.emit("join", uuid);
 }
 
-const stop = async () => {
-  const uuid = await getUUID();
-  socket.leave(uuid);
-}
-
 // event
 button.addEventListener("click", async () => start());
