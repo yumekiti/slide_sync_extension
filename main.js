@@ -18,11 +18,27 @@ socket.on("connect", () => {
 
 socket.on("event",  (value) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if(value === "test") {
+    if (value === "test") {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
         function: () => {
           document.querySelector("#tabTopics2 > a").click();
+        },
+      });
+    }
+    if(value === "next") {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        function: () => {
+          document.querySelector("#nextButton").click();
+        },
+      });
+    }
+    if(value === "back") {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        function: () => {
+          document.querySelector("#prevButton").click();
         },
       });
     }
