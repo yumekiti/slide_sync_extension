@@ -17,8 +17,14 @@ socket.on("connect", () => {
 });
 
 socket.on("event",  (value) => {
-  // send backgroud.js
-  chrome.runtime.sendMessage({type: "event", value: value});
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    chrome.scripting.executeScript({
+      target: { tabId: tabs[0].id },
+      function: () => {
+        document.querySelector("#tabTopics2 > a").click();
+      }
+    });
+  });
 });
 
 const start = async () => {

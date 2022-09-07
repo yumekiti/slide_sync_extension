@@ -3,6 +3,12 @@
   "description": "Build an Extension!",
   "version": "1.0",
   "manifest_version": 3,
+  "content_scripts": [
+    {
+      "js": ["main.js"],
+      "matches": ["*://*/*"]
+    }
+  ],
   "background": {
     "service_worker": "background.js"
   },
