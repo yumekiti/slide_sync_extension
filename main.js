@@ -26,7 +26,7 @@ socket.on("event",  (value) => {
         },
       });
     }
-    if(value === "back") {
+    if(value === "prev") {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
         function: () => {
