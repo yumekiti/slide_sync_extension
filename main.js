@@ -1,5 +1,4 @@
 const host = "localhost:8080";
-let socket
 
 // function
 const setUUID = async () => {
@@ -12,7 +11,7 @@ const getUUID = async () => {
   return uuid.uuid;
 }
 
-socket = io.connect("http://" + host);
+const socket = io.connect("http://" + host);
 socket.on("connect", () => {
   console.log("socket connected");
 });
