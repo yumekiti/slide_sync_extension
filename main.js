@@ -18,7 +18,8 @@ socket.on("connect", () => {
 });
 
 socket.on("event",  (value) => {
-  console.log(value);
+  // send backgroud.js
+  chrome.runtime.sendMessage({type: "event", value: value});
 });
 
 const start = async () => {
