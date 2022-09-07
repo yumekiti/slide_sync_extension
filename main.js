@@ -1,4 +1,4 @@
-const host = "localhost:8080";
+const host = "localhost:3333";
 
 // function
 const setUUID = async () => {
