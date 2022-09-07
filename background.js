@@ -8,3 +8,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     getEvent(request.value);
   }
 });
+
+chrome.action.onClicked.addListener((tab) => {
+  chrome.tabs.create({"url": "./normal_popup.html" });
+});
