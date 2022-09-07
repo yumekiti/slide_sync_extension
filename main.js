@@ -1,4 +1,4 @@
-const host = "192.168.11.6:3333";
+const host = "remote-for-slides.up.railway.app";
 
 // function
 const setUUID = async () => {
