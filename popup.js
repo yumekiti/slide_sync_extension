@@ -39,4 +39,7 @@ const start = async () => {
 }
 
 // event
-button.addEventListener("click", async () => start());
+button.addEventListener("click", async () => {
+  await start()
+  await chrome.runtime.sendMessage({ type: "start" });
+});
