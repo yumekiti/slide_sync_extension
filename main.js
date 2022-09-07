@@ -41,6 +41,16 @@ const start = async () => {
   await setUUID();
   const uuid = await getUUID();
 
+  document.getElementById("qrcode").innerHTML = "";
+  new QRCode(document.getElementById("qrcode"), {
+    text: "http://" + host + "/room/" + uuid,
+    width: 128,
+    height: 128,
+    colorDark : "#ffffff",
+    colorLight : "#000000",
+    correctLevel : QRCode.CorrectLevel.H
+  });
+  
   document.getElementById("uuid").textContent = uuid;
   await socket.emit("join", uuid);
 };
