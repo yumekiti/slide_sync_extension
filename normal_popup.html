@@ -1,16 +1,116 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Remote_for_Slides</title>
-</head>
-<body>
-  <button id="button">Create</button>
-  <div id="qrcode"></div>
-  <div id="uuid"></div>
-  <script src="./script/axios.min.js"></script>
-  <script src="./script/socket.io.min.js"></script>
-  <script src="./script/qrcode.min.js"></script>
-  <script src="main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./script/tailwind.min.js"></script>
+    <title>Remote_for_Slides</title>
+  </head>
+  <body>
+    <header class="h-16 bg-white">
+      <nav class="bg-white dark:bg-gray-800 shadow">
+        <div class="max-w-7xl mx-auto px-8">
+          <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+              <a class="flex-shrink-0" href="/">
+                <img
+                  class="h-8"
+                  src="/images/logo-light.svg"
+                  alt="Remote for Slides"
+                />
+              </a>
+            </div>
+            <div class="block">
+              <div class="ml-4 flex items-center md:ml-6">
+                <a
+                  href="https://chrome.google.com/webstore/category/extensions?hl=ja"
+                  target="_blank"
+                  class="p-1 rounded-full text-gray-400 focus:outline-none hover:text-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                >
+                  <img
+                    class="h-7 w-7 opacity-70 hover:opacity-100 duration-300"
+                    src="/images/extension.svg"
+                    alt="google chrome extension"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="px-4">
+      <section class="h-[80vh] flex items-center justify-center flex-1">
+        <div class="flex flex-col w-full">
+          <h1
+            class="text-5xl font-extrabold text-center lg:text-7xl 2xl:text-8xl"
+          >
+            <span
+              class="text-transparent bg-gradient-to-br bg-clip-text from-teal-500 via-indigo-500 to-sky-500 dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500"
+            >
+              Remote for
+            </span>
+
+            <span
+              class="text-transparent bg-gradient-to-tr bg-clip-text from-blue-500 via-pink-500 to-red-500 dark:from-sky-300 dark:via-pink-300 dark:to-red-500"
+            >
+              Slides
+            </span>
+          </h1>
+
+          <p
+            class="max-w-3xl mx-auto mt-6 text-lg text-center text-gray-700 dark:text-white md:text-xl"
+          >
+            プレゼンテーションをリアルタイムで遠隔操作するためのChrome拡張機能です。
+          </p>
+
+          <div id="shareWrap" class="hidden">
+            <div id="qrcode" class="flex justify-center mt-8"></div>
+            <div
+              class="flex justify-center min-w-3xl mx-auto mt-6 text-lg text-center text-gray-700 dark:text-white md:text-xl"
+            >
+              <input
+                type="text"
+                id="urlInputTag"
+                readonly
+                class="form-control block max-w-[396px] w-[70vw] px-3 py-1.5 text-sm font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded-l-md transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              />
+              <button
+                class="px-8 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-sky-500 rounded-r-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
+                id="copyButton"
+              >
+                copy
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="my-8 flex flex-col space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0"
+          >
+            <button
+              class="px-8 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-sky-500 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none sm:mx-2"
+              id="createButton"
+            >
+              Room Create
+            </button>
+          </div>
+          <p
+            class="text-center text-gray-700 dark:text-white text-md md:text-xl"
+          >
+            ルームを作成してURLを共有してください
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script/axios.min.js"></script>
+    <script src="./script/socket.io.min.js"></script>
+    <script src="./script/qrcode.min.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>

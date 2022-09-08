@@ -15,9 +15,7 @@
   "permissions": [
     "storage",
     "activeTab",
-    "scripting",
-    "http://*/*",
-    "https://*/*"
+    "scripting"
   ],
   "action": {
     "default_icon": {
