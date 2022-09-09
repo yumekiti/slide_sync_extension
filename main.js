@@ -56,8 +56,8 @@ const start = async () => {
   qrcodeElement.innerHTML = '';
   new QRCode(qrcodeElement, {
     text: link,
-    width: 128,
-    height: 128,
+    width: 128 * 2,
+    height: 128 * 2,
     colorDark: '#ffffff',
     colorLight: '#333333',
     correctLevel: QRCode.CorrectLevel.H,
