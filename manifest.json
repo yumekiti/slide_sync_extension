@@ -17,6 +17,9 @@
     "activeTab",
     "scripting"
   ],
+  "host_permissions": [
+    "*://*/*"
+  ],
   "action": {
     "default_icon": {
       "16": "/images/16.png",
