@@ -1,8 +1,8 @@
-const host = 'remote.yumekiti.net';
+const host = 'https://remote.yumekiti.net';
 
 // function
 const setUUID = async () => {
-  const res = await axios.get('https://' + host + '/uuid');
+  const res = await axios.get(host + '/uuid');
   chrome.storage.sync.set({ uuid: res.data.uuid });
 };
 
@@ -11,7 +11,7 @@ const getUUID = async () => {
   return uuid.uuid;
 };
 
-const socket = io.connect('://' + host);
+const socket = io.connect(host);
 socket.on('connect', () => {
   console.log('socket connected');
 });
@@ -50,7 +50,7 @@ const createButtonElement = document.getElementById('createButton');
 const start = async () => {
   await setUUID();
   const uuid = await getUUID();
-  const link = 'https://' + host + '/room/' + uuid;
+  const link = host + '/room/' + uuid;
 
   const qrcodeElement = document.getElementById('qrcode');
   qrcodeElement.innerHTML = '';
