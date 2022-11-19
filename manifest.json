@@ -6,7 +6,8 @@
   "content_scripts": [
     {
       "js": ["main.js"],
-      "matches": ["*://*/*"]
+      "matches": ["https://www.figma.com/proto/*"],
+      "run_at": "document_start"
     }
   ],
   "background": {
@@ -16,9 +17,6 @@
     "storage",
     "activeTab",
     "scripting"
-  ],
-  "host_permissions": [
-    "*://*/*"
   ],
   "action": {
     "default_icon": {
