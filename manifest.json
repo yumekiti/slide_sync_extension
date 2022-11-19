@@ -6,10 +6,7 @@
   "content_scripts": [
     {
       "js": ["main.js"],
-      "matches": [
-        "https://www.figma.com/proto/*",
-        "https://remote.yumekiti.net/*"
-      ],
+      "matches": ["https://remote.yumekiti.net/*"],
       "run_at": "document_start"
     }
   ],
