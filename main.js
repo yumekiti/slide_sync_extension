@@ -18,21 +18,51 @@ socket.on('connect', () => {
 
 socket.on('event', (value) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (value === 'next') {
-      chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        function: () => {
-          document.querySelector('[aria-label="Next frame"]').click();
-        },
-      });
+    const url = tabs[0].url;
+    const title = tabs[0].title;
+
+    if(!url && !title) return;
+
+    if(url.match(/figma/i)){
+      if (value === 'next') {
+        chrome.scripting.executeScript({
+          target: { tabId: tabs[0].id },
+          function: () => {
+            document.querySelector('[aria-label="Next frame"]').click();
+          },
+        });
+      }
+      if (value === 'prev') {
+        chrome.scripting.executeScript({
+          target: { tabId: tabs[0].id },
+          function: () => {
+            document.querySelector('[aria-label="Previous frame"]').click();
+          },
+        });
+      }
     }
-    if (value === 'prev') {
-      chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        function: () => {
-          document.querySelector('[aria-label="Previous frame"]').click();
-        },
-      });
+
+    if(title.match(/slidev/i) || url.match(/slidev/i)){
+      if (value === 'next') {
+        chrome.scripting.executeScript({
+          target: { tabId: tabs[0].id },
+          function: () => {
+            document
+              .querySelector("#slide-container > div.absolute.bottom-0.left-0.transition.duration-300.opacity-0.hover\\:opacity-100.opacity-0.p-2 > nav > div > button:nth-child(3)")
+              .click();
+          },
+        });
+      }
+      if (value === 'prev') {
+        chrome.scripting.executeScript({
+          target: { tabId: tabs[0].id },
+          function: () => {
+            document
+              .querySelector("#slide-container > div.absolute.bottom-0.left-0.transition.duration-300.opacity-0.hover\\:opacity-100.opacity-0.p-2 > nav > div > button:nth-child(2)")
+              .click();
+          },
+        });
+      }
     }
   });
 });
