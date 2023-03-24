@@ -86,7 +86,7 @@ socket.on('event', (value) => {
       }
     }
 
-    if(url.match(/google/i)){
+    if(url.match(/github/i)){
       if (value === 'next') {
         clickElement(
           '#p > div > button:nth-child(3)'
