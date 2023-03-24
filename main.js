@@ -23,47 +23,30 @@ socket.on('event', (value) => {
 
     if(!url && !title) return;
 
+    // どの要素にクリックするかのイベント
+    const clickElement = (selector) => {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        function: (selector) => {
+          document.querySelector(selector).click();
+        },
+        args: [selector],
+      });
+    };
+
     if(url.match(/figma/i)){
       if (value === 'next') {
-        chrome.scripting.executeScript({
-          target: { tabId: tabs[0].id },
-          function: () => {
-            document.querySelector('[aria-label="Next frame"]').click();
-          },
-        });
+        clickElement(
+          '#react-page > div > div > div > div.prototype--documentationContainer--OnI4T.prototype--suppressFocusRings--gtWQ5 > div > div.prototype--content--9wqOA > div.prototype--contentMiddle--Zuxw5 > div.prototype--footerContainer--G2XHU > div > div.footer--frameCounterContainer__OLD--XPdky > div > button:nth-child(3)'
+        );
       }
       if (value === 'prev') {
-        chrome.scripting.executeScript({
-          target: { tabId: tabs[0].id },
-          function: () => {
-            document.querySelector('[aria-label="Previous frame"]').click();
-          },
-        });
+        clickElement(
+          '#react-page > div > div > div > div.prototype--documentationContainer--OnI4T.prototype--suppressFocusRings--gtWQ5 > div > div.prototype--content--9wqOA > div.prototype--contentMiddle--Zuxw5 > div.prototype--footerContainer--G2XHU > div > div.footer--frameCounterContainer__OLD--XPdky > div > button:nth-child(1)'
+        );
       }
     }
 
-    if(title.match(/slidev/i) || url.match(/slidev/i)){
-      if (value === 'next') {
-        chrome.scripting.executeScript({
-          target: { tabId: tabs[0].id },
-          function: () => {
-            document
-              .querySelector("#slide-container > div.absolute.bottom-0.left-0.transition.duration-300.opacity-0.hover\\:opacity-100.opacity-0.p-2 > nav > div > button:nth-child(3)")
-              .click();
-          },
-        });
-      }
-      if (value === 'prev') {
-        chrome.scripting.executeScript({
-          target: { tabId: tabs[0].id },
-          function: () => {
-            document
-              .querySelector("#slide-container > div.absolute.bottom-0.left-0.transition.duration-300.opacity-0.hover\\:opacity-100.opacity-0.p-2 > nav > div > button:nth-child(2)")
-              .click();
-          },
-        });
-      }
-    }
   });
 });
 
