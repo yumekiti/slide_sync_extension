@@ -47,6 +47,32 @@ socket.on('event', (value) => {
       }
     }
 
+    if(url.match(/onedrive/i)){
+      if (value === 'next') {
+        clickElement(
+          '#nextButton'
+        );
+      }
+      if (value === 'prev') {
+        clickElement(
+          '#prevButton'
+        );
+      }
+    }
+
+    if(url.match(/canva/i)){
+      if (value === 'next') {
+        clickElement(
+          'body > div:nth-child(2) > div > div > div > div > div > div.w8GPyg._4iKiqA.pQuB_Q > main > div > div._10frKg > div > div > div > div.DGwyDg > div:nth-child(1) > div:nth-child(1) > div > button'
+        );
+      }
+      if (value === 'prev') {
+        clickElement(
+          'body > div:nth-child(2) > div > div > div > div > div > div.w8GPyg._4iKiqA.pQuB_Q > main > div > div._10frKg > div > div > div > div.DGwyDg > div:nth-child(1) > div:nth-child(3) > div > button'
+        );
+      }
+    }
+
   });
 });
 
