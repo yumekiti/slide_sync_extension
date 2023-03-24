@@ -73,6 +73,32 @@ socket.on('event', (value) => {
       }
     }
 
+    if(url.match(/hackmd/i)){
+      if (value === 'next') {
+        clickElement(
+          'body > div > div.reveal.none.center.focused.has-horizontal-slides.ready > aside > button.navigate-right.enabled'
+        );
+      }
+      if (value === 'prev') {
+        clickElement(
+          'body > div > div.reveal.none.center.focused.has-horizontal-slides.ready > aside > button.navigate-left.enabled'
+        );
+      }
+    }
+
+    if(url.match(/google/i)){
+      if (value === 'next') {
+        clickElement(
+          '#p > div > button:nth-child(3)'
+        );
+      }
+      if (value === 'prev') {
+        clickElement(
+          '#p > div > button:nth-child(1)'
+        );
+      }
+    }
+
   });
 });
 
