@@ -37,12 +37,12 @@ socket.on('event', (value) => {
     if(url.match(/figma/i)){
       if (value === 'next') {
         clickElement(
-          '#react-page > div > div > div > div.prototype--documentationContainer--OnI4T.prototype--suppressFocusRings--gtWQ5 > div > div.prototype--content--9wqOA > div.prototype--contentMiddle--Zuxw5 > div.prototype--footerContainer--G2XHU > div > div.footer--frameCounterContainer__OLD--XPdky > div > button:nth-child(3)'
+          '#react-page > div > div > div > div > div > div > div > div > div > div > button:nth-child(3)'
         );
       }
       if (value === 'prev') {
         clickElement(
-          '#react-page > div > div > div > div.prototype--documentationContainer--OnI4T.prototype--suppressFocusRings--gtWQ5 > div > div.prototype--content--9wqOA > div.prototype--contentMiddle--Zuxw5 > div.prototype--footerContainer--G2XHU > div > div.footer--frameCounterContainer__OLD--XPdky > div > button:nth-child(1)'
+          '#react-page > div > div > div > div > div > div > div > div > div > div > button:nth-child(1)'
         );
       }
     }
@@ -63,12 +63,12 @@ socket.on('event', (value) => {
     if(url.match(/canva/i)){
       if (value === 'next') {
         clickElement(
-          'body > div:nth-child(2) > div > div > div > div > div > div.w8GPyg._4iKiqA.pQuB_Q > main > div > div._10frKg > div > div > div > div.DGwyDg > div:nth-child(1) > div:nth-child(3) > div > button'
+          'body > div:nth-child(2) > div > div > div > div > div > div > main > div > div._10frKg > div > div > div > div > div:nth-child(1) > div:nth-child(3) > button'
         );
       }
       if (value === 'prev') {
         clickElement(
-          'body > div:nth-child(2) > div > div > div > div > div > div.w8GPyg._4iKiqA.pQuB_Q > main > div > div._10frKg > div > div > div > div.DGwyDg > div:nth-child(1) > div:nth-child(1) > div > button'
+          'body > div:nth-child(2) > div > div > div > div > div > div > main > div > div > div > div > div > div > div:nth-child(1) > div:nth-child(1) > button'
         );
       }
     }
@@ -76,12 +76,12 @@ socket.on('event', (value) => {
     if(url.match(/hackmd/i)){
       if (value === 'next') {
         clickElement(
-          'body > div > div.reveal.none.center.focused.has-horizontal-slides.ready > aside > button.navigate-right.enabled'
+          'body > div > div > aside > button.navigate-right'
         );
       }
       if (value === 'prev') {
         clickElement(
-          'body > div > div.reveal.none.center.focused.has-horizontal-slides.ready > aside > button.navigate-left.enabled'
+          'body > div > div > aside > button.navigate-left'
         );
       }
     }
@@ -96,6 +96,32 @@ socket.on('event', (value) => {
         clickElement(
           '#p > div > button:nth-child(1)'
         );
+      }
+    }
+
+    if(url.match(/pitch/i)){
+      if (value === 'next') {
+        clickElement(
+          '#app > div > div > div > div > div:nth-child(1) > div > button:nth-child(3)'
+        );
+      }
+      if (value === 'prev') {
+        clickElement(
+          '#app > div > div > div > div > div:nth-child(1) > div > button:nth-child(1)'
+        );
+      }
+    }
+
+    if(url.match(/slideshare/i)){
+      if (value === 'next') {
+        clickElement(
+          '#overlay-next-slide'
+        );
+      }
+      if (value === 'prev') {
+        clickElement(
+          '#overlay-previous-slide'
+        )
       }
     }
 
