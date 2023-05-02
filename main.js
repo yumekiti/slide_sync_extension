@@ -37,12 +37,12 @@ socket.on('event', (value) => {
     if(url.match(/figma/i)){
       if (value === 'next') {
         clickElement(
-          '#react-page > div > div > div > div > div > div > div > div > div > div > button:nth-child(3)'
+          '#react-page > div > div > div > div > div > div > div > div > div > div > div > button:nth-child(3)'
         );
       }
       if (value === 'prev') {
         clickElement(
-          '#react-page > div > div > div > div > div > div > div > div > div > div > button:nth-child(1)'
+          '#react-page > div > div > div > div > div > div > div > div > div > div > div > button:nth-child(1)'
         );
       }
     }
@@ -89,12 +89,12 @@ socket.on('event', (value) => {
     if(url.match(/github/i)){
       if (value === 'next') {
         clickElement(
-          '#p > div > button:nth-child(3)'
+          '#\\:\\$p > div > button:nth-child(3)'
         );
       }
       if (value === 'prev') {
         clickElement(
-          '#p > div > button:nth-child(1)'
+          '#\\:\\$p > div > button:nth-child(1)'
         );
       }
     }
@@ -115,12 +115,12 @@ socket.on('event', (value) => {
     if(url.match(/slideshare/i)){
       if (value === 'next') {
         clickElement(
-          '#overlay-next-slide'
+          '#next-slide'
         );
       }
       if (value === 'prev') {
         clickElement(
-          '#overlay-previous-slide'
+          '#previous-slide'
         )
       }
     }
