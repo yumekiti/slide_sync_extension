@@ -1,7 +1,7 @@
 {
-  "name": "Remote for Slides",
+  "name": "Slide Sync",
   "description": "Slides can be operated remotely.",
-  "version": "1.7",
+  "version": "2.0",
   "manifest_version": 3,
   "content_scripts": [
     {
