@@ -1,4 +1,4 @@
-const host = 'https://remote.yumekiti.net';
+const host = 'https://slidesync.yumekiti.net';
 // function
 const setUUID = async () => {
   const res = await axios.get(host + '/uuid');
