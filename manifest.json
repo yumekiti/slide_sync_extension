@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "js": ["main.js"],
-      "matches": ["https://remote.yumekiti.net/*"],
+      "matches": ["https://remote.yumekiti.net/*", "https://slidesync.yumekiti.net/*"],
       "run_at": "document_start"
     }
   ],
@@ -19,7 +19,8 @@
     "scripting"
   ],
   "host_permissions": [
-    "https://remote.yumekiti.net/*"
+    "https://remote.yumekiti.net/*",
+    "https://slidesync.yumekiti.net/*"
   ],
   "action": {
     "default_icon": {

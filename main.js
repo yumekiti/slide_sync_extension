@@ -1,5 +1,4 @@
 const host = 'https://remote.yumekiti.net';
-
 // function
 const setUUID = async () => {
   const res = await axios.get(host + '/uuid');
@@ -11,17 +10,34 @@ const getUUID = async () => {
   return uuid.uuid;
 };
 
-const socket = io.connect(host);
+const getButtons = async () => {
+  return await axios.get(host + '/buttons');
+};
+
+const socket = io.connect(host, {
+  transports: ['websocket'],
+});
 socket.on('connect', () => {
   console.log('socket connected');
 });
 
 socket.on('event', (value) => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
     const url = tabs[0].url;
     const title = tabs[0].title;
 
     if(!url && !title) return;
+
+    // ページ番号がある要素を取得するイベント
+    const getElement = (selector) => {
+      return chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        function: (selector) => {
+          return document.querySelector(selector).textContent;
+        },
+        args: [selector],
+      });
+    };
 
     // どの要素にクリックするかのイベント
     const clickElement = (selector) => {
@@ -34,101 +50,34 @@ socket.on('event', (value) => {
       });
     };
 
-    if(url.match(/figma/i)){
-      if (value === 'next') {
-        clickElement(
-          '#react-page > div > div > div > div > div > div > div > div > div > div > div > button:nth-child(3)'
-        );
-      }
-      if (value === 'prev') {
-        clickElement(
-          '#react-page > div > div > div > div > div > div > div > div > div > div > div > button:nth-child(1)'
-        );
-      }
-    }
+    const buttons = await getButtons();
 
-    if(url.match(/onedrive/i)){
-      if (value === 'next') {
-        clickElement(
-          '#nextButton'
-        );
+    buttons.data.map((button) => {
+      if (url.match(button.url)) {
+        const event = value.event;
+        const uuid = value.uuid;
+        if (event === 'next') {
+          clickElement(button.next);
+        }
+        if (event === 'prev') {
+          clickElement(button.prev);
+        }
+        getElement(button.page).then((res) => {
+          data = {
+            uuid: uuid,
+            page: res[0].result,
+            url: url,
+          };
+          socket.emit('page', data);
+        });
       }
-      if (value === 'prev') {
-        clickElement(
-          '#prevButton'
-        );
-      }
-    }
-
-    if(url.match(/canva/i)){
-      if (value === 'next') {
-        clickElement(
-          'body > div:nth-child(2) > div > div > div > div > div > div > main > div > div._10frKg > div > div > div > div > div:nth-child(1) > div:nth-child(3) > button'
-        );
-      }
-      if (value === 'prev') {
-        clickElement(
-          'body > div:nth-child(2) > div > div > div > div > div > div > main > div > div > div > div > div > div > div:nth-child(1) > div:nth-child(1) > button'
-        );
-      }
-    }
-
-    if(url.match(/hackmd/i)){
-      if (value === 'next') {
-        clickElement(
-          'body > div > div > aside > button.navigate-right'
-        );
-      }
-      if (value === 'prev') {
-        clickElement(
-          'body > div > div > aside > button.navigate-left'
-        );
-      }
-    }
-
-    if(url.match(/github/i)){
-      if (value === 'next') {
-        clickElement(
-          '#\\:\\$p > div > button:nth-child(3)'
-        );
-      }
-      if (value === 'prev') {
-        clickElement(
-          '#\\:\\$p > div > button:nth-child(1)'
-        );
-      }
-    }
-
-    if(url.match(/pitch/i)){
-      if (value === 'next') {
-        clickElement(
-          '#app > div > div > div > div > div:nth-child(1) > div > button:nth-child(3)'
-        );
-      }
-      if (value === 'prev') {
-        clickElement(
-          '#app > div > div > div > div > div:nth-child(1) > div > button:nth-child(1)'
-        );
-      }
-    }
-
-    if(url.match(/slideshare/i)){
-      if (value === 'next') {
-        clickElement(
-          '#next-slide'
-        );
-      }
-      if (value === 'prev') {
-        clickElement(
-          '#previous-slide'
-        )
-      }
-    }
-
+    });
   });
 });
 
 const createButtonElement = document.getElementById('createButton');
+const updateButtonElement = document.getElementById('updateButton');
+const textElement = document.getElementById('text');
 
 const start = async () => {
   await setUUID();
@@ -166,3 +115,13 @@ const start = async () => {
 };
 
 createButtonElement.addEventListener('click', async () => await start());
+updateButtonElement.addEventListener('click', async () => {
+  const uuid = await getUUID();
+  const data = {
+    uuid: uuid,
+    text: textElement.value,
+  };
+  await socket.emit('note', data);
+});
+
+start();
