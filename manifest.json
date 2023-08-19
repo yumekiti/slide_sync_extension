@@ -1,12 +1,12 @@
 {
   "name": "Slide Sync",
   "description": "Slides can be operated remotely.",
-  "version": "2.0",
+  "version": "2.1",
   "manifest_version": 3,
   "content_scripts": [
     {
       "js": ["main.js"],
-      "matches": ["https://remote.yumekiti.net/*", "https://slidesync.yumekiti.net/*"],
+      "matches": ["https://slidesync.yumekiti.net/*"],
       "run_at": "document_start"
     }
   ],
@@ -19,7 +19,6 @@
     "scripting"
   ],
   "host_permissions": [
-    "https://remote.yumekiti.net/*",
     "https://slidesync.yumekiti.net/*"
   ],
   "action": {

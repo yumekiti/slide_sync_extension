@@ -124,4 +124,4 @@ updateButtonElement.addEventListener('click', async () => {
   await socket.emit('note', data);
 });
 
-start();
+setTimeout(async () => await start(), 100);
